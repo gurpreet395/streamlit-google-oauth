@@ -1,4 +1,4 @@
-protobuf<=3.20.x
+protobuf<=3.20
 streamlit
 httpx-oauth
 python-dotenv
