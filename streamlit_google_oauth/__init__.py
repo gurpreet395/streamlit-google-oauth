@@ -8,7 +8,9 @@ __version__ = "0.1"
 async def write_authorization_url(client, redirect_uri):
     authorization_url = await client.get_authorization_url(
         redirect_uri,
-        scope=["profile", "email"],
+        scope=["profile", "email",
+               'https://www.googleapis.com/auth/drive.readonly',
+               'https://www.googleapis.com/auth/drive.file'],
         extras_params={"access_type": "offline"},
     )
     return authorization_url
@@ -106,7 +108,7 @@ def login(
                         )
                     )
                     logout_button(button_text=logout_button_text)
-                    return (st.session_state.user_id, st.session_state.user_email)
+                    return (st.session_state.user_id, st.session_state.user_email, token["access_token"])
     else:
         logout_button(button_text=logout_button_text)
-        return (st.session_state.user_id, st.session_state.user_email)
+        return (st.session_state.user_id, st.session_state.user_email, None)
